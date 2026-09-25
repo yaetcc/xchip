@@ -337,6 +337,24 @@ button{font-family:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
 }
+/* ===== 创建盲盒：上传封面 / 权重 / 固定价 ===== */
+.cover-upload{cursor:pointer}
+.cover-preview{height:150px;background:var(--bg2);border:1px dashed var(--line2);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:.2s;background-position:center;background-size:cover}
+.cover-preview:hover{border-color:var(--green)}
+.cover-preview svg{width:34px;height:34px}
+.cover-preview span{font-size:13px;color:var(--text2)}
+.cover-preview small{font-size:11px;color:var(--text3);max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.weight-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.weight-row .w{display:flex;flex-direction:column;gap:3px}
+.weight-row .w span{font-size:10px;color:var(--text3)}
+.weight-row .w input{background:var(--bg2);border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:12px;font-family:var(--mono);padding:6px 8px;text-align:center;width:100%}
+.weight-row .w input:focus{border-color:var(--green);outline:none}
+.sale-mode{display:flex;gap:8px}
+.sale-mode span{flex:1;text-align:center;padding:9px 0;background:var(--bg2);border:1px solid var(--line);border-radius:10px;font-size:12px;color:var(--text2);cursor:pointer;transition:.2s}
+.sale-mode span.on{border-color:var(--green);color:var(--green);background:rgba(0,229,160,.06)}
+.price-big{font-size:36px;font-weight:800;color:var(--green);font-family:var(--mono);line-height:1.1}
+.price-big small{font-size:13px;color:var(--text3);font-weight:400;font-family:'Noto Sans SC',sans-serif}
+.price-rows{margin:18px 0 22px;border-top:1px solid var(--line);padding-top:14px}
 </style>
 </head>
 <body>
@@ -436,49 +454,76 @@ button{font-family:inherit;cursor:pointer}
       <div class="form-card">
         <label class="form-label">盲盒名称</label>
         <input class="input" id="boxName" value="老矿工的零件盲盒" maxlength="20">
-        <label class="form-label">盲盒封面</label>
-        <div class="part-picker" id="coverPicker">
-          <div class="ppart on" data-cover="0"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><rect x="8" y="8" width="8" height="8" fill="none" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">机箱</span></div>
-          <div class="ppart" data-cover="1"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="11" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M4 11h16M9 7v11M15 7v11" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">主板</span></div>
-          <div class="ppart" data-cover="2"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M9 8l3 3 3-3M9 13l3 3 3-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">显卡</span></div>
-          <div class="ppart" data-cover="3"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="9" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M8 8V5M12 8V5M16 8V5M8 20v-3M12 20v-3M16 20v-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">CPU</span></div>
+        <label class="form-label">盲盒封面（上传图片）</label>
+        <div class="cover-upload" id="coverUpload" onclick="document.getElementById('coverFile').click()">
+          <input type="file" id="coverFile" accept="image/*" hidden onchange="onCoverFile(this)">
+          <div class="cover-preview" id="coverPreview">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#5E7386" stroke-width="1.4"/><path d="M8.5 15l3-3.5 2.5 3 2-2.5 2.5 3" stroke="#5E7386" stroke-width="1.4"/><circle cx="9" cy="9" r="1.3" fill="none" stroke="#5E7386" stroke-width="1.3"/></svg>
+            <span>点击上传封面</span>
+            <small>PNG / JPG · 建议 1:1 · ≤ 5MB</small>
+          </div>
         </div>
-        <label class="form-label">盒内部件池（勾选类型，稀有部件自动按权重混入）</label>
+        <label class="form-label">盒内部件池（默认全选，点击取消勾选）</label>
         <div class="part-picker" id="partPoolPicker">
-          <div class="ppart on" data-typ="cpu"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="9" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M8 8V5M12 8V5M16 8V5M8 20v-3M12 20v-3M16 20v-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">CPU</span><span class="cnt">×12</span></div>
-          <div class="ppart on" data-typ="gpu"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M9 8l3 3 3-3M9 13l3 3 3-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">显卡</span><span class="cnt">×6</span></div>
-          <div class="ppart on" data-typ="ram"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M9 7v10M15 7v10" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">内存</span><span class="cnt">×16</span></div>
-          <div class="ppart on" data-typ="mb"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="11" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M4 11h16M9 7v11M15 7v11" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">主板</span><span class="cnt">×10</span></div>
-          <div class="ppart" data-typ="psu"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="#8B9BAB" stroke-width="1.4"/><path d="M12 9.5V7M12 17v-1.5" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">电源</span><span class="cnt">×8</span></div>
-          <div class="ppart" data-typ="cool"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M12 5.5V4M12 20v-1.5M5.5 12H4M20 12h-1.5" stroke="#8B9BAB" stroke-width="1.2"/><path d="M12 9.5l3 2.5-3 2.5-3-2.5z" fill="none" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">散热</span><span class="cnt">×10</span></div>
-          <div class="ppart" data-typ="disk"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="#8B9BAB" stroke-width="1.2"/><path d="M12 4v4M12 16v4" stroke="#8B9BAB" stroke-width="1"/></svg><span class="pn">硬盘</span><span class="cnt">×12</span></div>
-          <div class="ppart" data-typ="case"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><rect x="8" y="8" width="8" height="8" fill="none" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">机箱</span><span class="cnt">×10</span></div>
+          <div class="ppart on" data-typ="cpu"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="9" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M8 8V5M12 8V5M16 8V5M8 20v-3M12 20v-3M16 20v-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">CPU</span></div>
+          <div class="ppart on" data-typ="gpu"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M9 8l3 3 3-3M9 13l3 3 3-3" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">显卡</span></div>
+          <div class="ppart on" data-typ="ram"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M9 7v10M15 7v10" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">内存</span></div>
+          <div class="ppart on" data-typ="mb"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="11" rx="1.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M4 11h16M9 7v11M15 7v11" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">主板</span></div>
+          <div class="ppart on" data-typ="psu"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="#8B9BAB" stroke-width="1.4"/><path d="M12 9.5V7M12 17v-1.5" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">电源</span></div>
+          <div class="ppart on" data-typ="cool"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><path d="M12 5.5V4M12 20v-1.5M5.5 12H4M20 12h-1.5" stroke="#8B9BAB" stroke-width="1.2"/><path d="M12 9.5l3 2.5-3 2.5-3-2.5z" fill="none" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">散热</span></div>
+          <div class="ppart on" data-typ="disk"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="#8B9BAB" stroke-width="1.2"/><path d="M12 4v4M12 16v4" stroke="#8B9BAB" stroke-width="1"/></svg><span class="pn">硬盘</span></div>
+          <div class="ppart on" data-typ="case"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#8B9BAB" stroke-width="1.6"/><rect x="8" y="8" width="8" height="8" fill="none" stroke="#8B9BAB" stroke-width="1.2"/></svg><span class="pn">机箱</span></div>
+        </div>
+        <label class="form-label" style="margin-top:14px">开盒权重（数值越高越容易开出）</label>
+        <div class="weight-row" id="weightRow">
+          <label class="w"><span>CPU</span><input type="number" data-w="cpu" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>显卡</span><input type="number" data-w="gpu" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>内存</span><input type="number" data-w="ram" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>主板</span><input type="number" data-w="mb" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>电源</span><input type="number" data-w="psu" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>散热</span><input type="number" data-w="cool" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>硬盘</span><input type="number" data-w="disk" value="100" min="1" oninput="updateParts()"></label>
+          <label class="w"><span>机箱</span><input type="number" data-w="case" value="100" min="1" oninput="updateParts()"></label>
         </div>
         <div class="input-row" style="margin-top:18px">
           <div style="flex:1">
             <label class="form-label" style="margin-top:0">总盒数</label>
-            <input class="input" id="boxTotal" type="number" value="100">
+            <input class="input" id="boxTotal" type="number" value="10000" min="1">
           </div>
           <div style="flex:1">
-            <label class="form-label" style="margin-top:0">底价（XCHIP）</label>
-            <input class="input" id="boxBase" type="number" value="100">
+            <label class="form-label" style="margin-top:0">部件供应（每类份数）</label>
+            <input class="input" id="boxSupply" type="number" value="10000" min="1">
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="flex:1">
+            <label class="form-label" style="margin-top:0">每盒价格（XCHIP）</label>
+            <input class="input" id="boxBase" type="number" value="0.01" min="0" step="0.001">
+          </div>
+          <div style="flex:1">
+            <label class="form-label" style="margin-top:0">销售方式</label>
+            <div class="sale-mode" id="saleMode">
+              <span class="on" data-mode="fixed">固定价格</span>
+              <span data-mode="auction">拍卖</span>
+            </div>
           </div>
         </div>
         <div class="summary-box">
           <div class="sum-row"><span>创建费</span><b>5,000 XCHIP</b></div>
-          <div class="sum-row"><span>部件入库</span><b id="sumParts">84 件</b></div>
-          <div class="sum-row"><span>预估销售额</span><b id="sumSales">—</b></div>
-          <div class="sum-row strong"><span>你的抽成（2%）</span><b id="sumCut">—</b></div>
+          <div class="sum-row"><span>部件入库</span><b id="sumParts">80,000 件</b></div>
+          <div class="sum-row"><span>预估销售额</span><b id="sumSales">100 XCHIP</b></div>
+          <div class="sum-row strong"><span>你的抽成（2%）</span><b id="sumCut">2 XCHIP</b></div>
         </div>
         <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:20px" onclick="toast('盲盒已创建（演示）','模拟创建成功')">创建盲盒 · 支付 5,000 XCHIP</button>
       </div>
       <div class="curve-card">
-        <h3>定价曲线预览</h3>
-        <p class="sub">pump 式绑定曲线：越卖越贵，早期买家赚价差</p>
-        <svg class="curve-svg" id="curveSvg" viewBox="0 0 400 220" preserveAspectRatio="none"></svg>
-        <div class="curve-legend">
-          <span class="l1"><i></i>当前价</span>
-          <span class="l2"><i></i>已售进度</span>
+        <h3>销售设置</h3>
+        <p class="sub">固定价格销售：每盒同价，卖完即止</p>
+        <div class="price-big"><span id="cardPrice">0.01</span> <small>XCHIP / 盒</small></div>
+        <div class="price-rows">
+          <div class="sum-row"><span>总盒数</span><b id="cardTotal">10,000</b></div>
+          <div class="sum-row"><span>销售总额</span><b id="cardSales">100 XCHIP</b></div>
+          <div class="sum-row strong"><span>创建者抽成（2%）</span><b id="cardCut">2 XCHIP</b></div>
         </div>
         <div class="step-tag"><span class="n">1</span> 创建盲盒，部件质押入库</div>
         <div class="step-tag"><span class="n">2</span> 玩家抢购开盒，实时抽件</div>
@@ -767,50 +812,47 @@ function closeOpen(){$('#openOverlay').classList.remove('show')}
 
 /* ============ 创建盲盒 ============ */
 function goCreate(){scrollTo2('#create')}
-document.querySelectorAll('#coverPicker .ppart').forEach(function(p){
-  p.onclick=function(){
-    document.querySelectorAll('#coverPicker .ppart').forEach(function(x){x.classList.remove('on')});
-    p.classList.add('on');drawCurve();
-  };
-});
-var poolCnt={cpu:12,gpu:6,ram:16,mb:10,psu:8,cool:10,disk:12,case:10};
-document.querySelectorAll('#partPoolPicker .ppart').forEach(function(p){
-  p.onclick=function(){
-    p.classList.toggle('on');
-    var sum=0;
-    document.querySelectorAll('#partPoolPicker .ppart.on').forEach(function(x){
-      sum+=poolCnt[x.dataset.typ];
-    });
-    $('#sumParts').textContent=sum+' 件';
-  };
-});
-function drawCurve(){
-  var svg=$('#curveSvg');var base=parseFloat($('#boxBase').value)||100;var total=parseInt($('#boxTotal').value)||100;
-  var W=400,H=220,pad=30;
-  var s='';
-  for(var gx=pad;gx<=W-pad;gx+=(W-pad*2)/8){s+='<line x1="'+gx+'" y1="'+pad+'" x2="'+gx+'" y2="'+(H-pad)+'" stroke="#1E2C38" stroke-width="1"/>'}
-  for(var gy=pad;gy<=H-pad;gy+=(H-pad*2)/4){s+='<line x1="'+pad+'" y1="'+gy+'" x2="'+(W-pad)+'" y2="'+gy+'" stroke="#1E2C38" stroke-width="1"/>'}
-  var pts=[];
-  for(var n=0;n<=total;n+=Math.max(1,Math.ceil(total/40))){
-    var x=pad+(n/total)*(W-pad*2);
-    var price=base*Math.pow(1.018,n);
-    var y=H-pad-(price/(base*Math.pow(1.018,total)))*(H-pad*2);
-    pts.push(x+','+y);
-  }
-  s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linejoin="round"/>';
-  s+='<polygon points="'+pts.join(' ')+' '+(W-pad)+','+(H-pad)+' '+pad+','+(H-pad)+'" fill="rgba(0,229,160,.08)"/>';
-  var cn=Math.min(50,total),xn=pad+(cn/total)*(W-pad*2),pn=base*Math.pow(1.018,cn),yn=H-pad-(pn/(base*Math.pow(1.018,total)))*(H-pad*2);
-  s+='<circle cx="'+xn+'" cy="'+yn+'" r="5" fill="var(--cyan)"/><circle cx="'+xn+'" cy="'+yn+'" r="9" fill="none" stroke="var(--cyan)" stroke-opacity=".3"/>';
-  s+='<text x="'+Math.min(xn+12,W-pad-60)+'" y="'+Math.max(yn-8,pad+10)+'" fill="var(--cyan)" font-size="11" font-family="monospace">已售 '+cn+' · '+fmtPrice(pn)+'</text>';
-  s+='<text x="'+pad+'" y="'+(H-pad-8)+'" fill="#5E7386" font-size="10" font-family="monospace">0 份</text>';
-  s+='<text x="'+(W-pad-50)+'" y="'+(H-pad-8)+'" fill="#5E7386" font-size="10" font-family="monospace">'+total+' 份</text>';
-  svg.innerHTML=s;
-  var sumSales=base*(Math.pow(1.018,total)-1)/0.018;
-  $('#sumSales').textContent=Math.round(sumSales).toLocaleString()+' XCHIP';
-  $('#sumCut').textContent=Math.round(sumSales*0.02).toLocaleString()+' XCHIP';
+function onCoverFile(inp){
+  if(!inp.files || !inp.files[0]) return;
+  var f=inp.files[0];
+  if(f.size>5*1024*1024){ toast('图片过大','请上传 ≤ 5MB 的封面'); inp.value=''; return; }
+  var url=URL.createObjectURL(f);
+  var pv=$('#coverPreview');
+  pv.style.backgroundImage='url('+url+')';
+  pv.style.backgroundSize='cover';
+  pv.style.backgroundPosition='center';
+  var sp=pv.querySelector('span'); if(sp) sp.textContent='封面已上传';
+  var sm=pv.querySelector('small'); if(sm) sm.textContent=f.name.slice(0,24);
+  toast('封面上传成功','演示环境仅本地预览');
 }
-$('#boxTotal').oninput=drawCurve;$('#boxBase').oninput=drawCurve;
-drawCurve();
+document.querySelectorAll('#partPoolPicker .ppart').forEach(function(p){
+  p.onclick=function(){ p.classList.toggle('on'); updateParts(); };
+});
+document.querySelectorAll('#saleMode span').forEach(function(s){
+  s.onclick=function(){
+    document.querySelectorAll('#saleMode span').forEach(function(x){x.classList.remove('on')});
+    s.classList.add('on'); updateParts();
+  };
+});
+function updateParts(){
+  var checked=0;
+  document.querySelectorAll('#partPoolPicker .ppart.on').forEach(function(){ checked++; });
+  var supply=parseInt($('#boxSupply').value)||0;
+  $('#sumParts').textContent=(checked*supply).toLocaleString()+' 件';
+  var base=parseFloat($('#boxBase').value)||0;
+  var total=parseInt($('#boxTotal').value)||0;
+  var sales=base*total;
+  $('#sumSales').textContent=sales.toLocaleString()+' XCHIP';
+  $('#sumCut').textContent=(sales*0.02).toLocaleString()+' XCHIP';
+  $('#cardPrice').textContent=String(base);
+  $('#cardTotal').textContent=total.toLocaleString();
+  $('#cardSales').textContent=sales.toLocaleString()+' XCHIP';
+  $('#cardCut').textContent=(sales*0.02).toLocaleString()+' XCHIP';
+}
+['boxTotal','boxBase','boxSupply'].forEach(function(id){
+  $('#'+id).oninput=updateParts;
+});
+updateParts();
 
 /* ============ 部件库 ============ */
 function renderParts(){
@@ -885,7 +927,6 @@ $('#walletBtn').onclick=function(){
 /* ============ 初始化 ============ */
 renderBoxes('all');renderParts();
 $('#tapeoutBtn').disabled=true;
-$('#sumParts').textContent='84 件';
 </script>
 
 </html>

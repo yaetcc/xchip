@@ -447,7 +447,7 @@ button{font-family:inherit;cursor:pointer}
       <div>
         <div class="tag-line">CREATE</div>
         <h2>创建你的盲盒</h2>
-        <p class="sub">创建费 10 XCHIP · 销售额 90% 归你 · 10% 平台销毁</p>
+        <p class="sub">创建费 10 XCHIP · 90% 归你 · 5% 平台销毁 · 5% 持币分红</p>
       </div>
     </div>
     <div class="create-grid">
@@ -512,7 +512,8 @@ button{font-family:inherit;cursor:pointer}
           <div class="sum-row"><span>创建费</span><b>10 XCHIP</b></div>
           <div class="sum-row"><span>部件入库</span><b id="sumParts">80,000 件</b></div>
           <div class="sum-row"><span>预估销售额</span><b id="sumSales">100 XCHIP</b></div>
-          <div class="sum-row"><span>平台销毁（10%）</span><b id="sumBurn">10 XCHIP</b></div>
+          <div class="sum-row"><span>平台销毁（5%）</span><b id="sumBurn">5 XCHIP</b></div>
+          <div class="sum-row"><span>XCHIP 持币分红（5%）</span><b id="sumDiv">5 XCHIP</b></div>
           <div class="sum-row strong"><span>你的收益（90%）</span><b id="sumCut">90 XCHIP</b></div>
         </div>
         <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:20px" onclick="toast('盲盒已创建（演示）','模拟创建成功')">创建盲盒 · 支付 10 XCHIP</button>
@@ -524,13 +525,14 @@ button{font-family:inherit;cursor:pointer}
         <div class="price-rows">
           <div class="sum-row"><span>总盒数</span><b id="cardTotal">10,000</b></div>
           <div class="sum-row"><span>销售总额</span><b id="cardSales">100 XCHIP</b></div>
-          <div class="sum-row"><span>平台销毁（10%）</span><b id="cardBurn">10 XCHIP</b></div>
+          <div class="sum-row"><span>平台销毁（5%）</span><b id="cardBurn">5 XCHIP</b></div>
+          <div class="sum-row"><span>XCHIP 持币分红（5%）</span><b id="cardDiv">5 XCHIP</b></div>
           <div class="sum-row strong"><span>创建者收益（90%）</span><b id="cardCut">90 XCHIP</b></div>
         </div>
         <div class="step-tag"><span class="n">1</span> 创建盲盒，部件质押入库</div>
         <div class="step-tag"><span class="n">2</span> 玩家抢购开盒，实时抽件</div>
         <div class="step-tag"><span class="n">3</span> 集齐 8 类部件，流片合成主机</div>
-        <div class="step-tag"><span class="n">4</span> 销售额 90% 归你，10% 平台销毁</div>
+        <div class="step-tag"><span class="n">4</span> 90% 归你 · 5% 销毁 · 5% 持币分红</div>
       </div>
     </div>
   </div>
@@ -594,7 +596,7 @@ button{font-family:inherit;cursor:pointer}
       <div>
         <div class="tag-line">CREATOR ECONOMY</div>
         <h2>我的创作者面板</h2>
-        <p class="sub">每份销售 90% 归你，10% 平台销毁 · 上不封顶</p>
+        <p class="sub">每份销售 90% 归你 · 5% 平台销毁 · 5% 持币分红 · 上不封顶</p>
       </div>
     </div>
     <div class="creator-grid">
@@ -844,14 +846,16 @@ function updateParts(){
   var base=parseFloat($('#boxBase').value)||0;
   var total=parseInt($('#boxTotal').value)||0;
   var sales=base*total;
-  var burn=sales*0.1, mine=sales*0.9;
+  var burn=sales*0.05, div=sales*0.05, mine=sales*0.9;
   $('#sumSales').textContent=sales.toLocaleString()+' XCHIP';
   $('#sumBurn').textContent=burn.toLocaleString()+' XCHIP';
+  $('#sumDiv').textContent=div.toLocaleString()+' XCHIP';
   $('#sumCut').textContent=mine.toLocaleString()+' XCHIP';
   $('#cardPrice').textContent=String(base);
   $('#cardTotal').textContent=total.toLocaleString();
   $('#cardSales').textContent=sales.toLocaleString()+' XCHIP';
   $('#cardBurn').textContent=burn.toLocaleString()+' XCHIP';
+  $('#cardDiv').textContent=div.toLocaleString()+' XCHIP';
   $('#cardCut').textContent=mine.toLocaleString()+' XCHIP';
 }
 ['boxTotal','boxBase','boxSupply'].forEach(function(id){

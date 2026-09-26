@@ -136,6 +136,49 @@ button{font-family:inherit;cursor:pointer}
 .sold-tag{font-size:12px;color:var(--text2);font-family:var(--mono)}
 .sold-tag b{color:var(--text)}
 
+/* ===== 交易市场 ===== */
+.ex-grid{display:grid;grid-template-columns:340px 1fr;gap:22px;margin-bottom:26px;align-items:start}
+.ex-grid.nf{grid-template-columns:340px 1fr}
+.ex-form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.ex-form h4{font-size:15px;font-weight:700;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+.ex-form h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.ex-form label{display:block;color:var(--text3);font-size:12px;margin:12px 0 6px}
+.ex-form .input,.ex-form select.input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font-size:14px;box-sizing:border-box;font-family:inherit}
+.ex-form .input:focus{border-color:var(--cyan);outline:none}
+.ex-row{display:flex;gap:10px}
+.ex-row>div{flex:1}
+.ex-list{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.ex-list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+.ex-list-head h4{margin:0;font-size:15px;font-weight:700}
+.order-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px dashed rgba(255,255,255,.07);flex-wrap:wrap}
+.order-row:first-of-type{border-top:none}
+.order-part{display:flex;align-items:center;gap:10px;flex:1;min-width:170px}
+.order-part svg{width:30px;height:30px;flex-shrink:0}
+.op-name{font-size:14px;font-weight:600}
+.op-sub{color:var(--text3);font-size:11px;font-family:var(--mono)}
+.rar-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;letter-spacing:.5px;margin-left:6px}
+.order-qty{color:var(--text2);font-size:13px;text-align:center;min-width:46px}
+.order-qty b{color:var(--text);font-family:var(--mono)}
+.order-price{font-size:15px;font-weight:800;font-family:var(--mono);color:var(--green);min-width:86px;text-align:right}
+.order-price small{display:block;color:var(--text3);font-size:10px;font-weight:400;text-align:right}
+.buy-btn{background:var(--green);color:#04121B;border:none;border-radius:9px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.buy-btn:hover{box-shadow:0 0 16px rgba(0,229,160,.4)}
+.buy-btn.off{background:var(--panel2);color:var(--red);border:1px solid rgba(244,63,94,.4)}
+.buy-btn.off:hover{box-shadow:0 0 16px rgba(244,63,94,.25)}
+.pool-card{background:linear-gradient(120deg,rgba(0,229,160,.1),rgba(34,211,238,.05));border:1px solid rgba(0,229,160,.3);border-radius:14px;padding:14px 18px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.pool-card .pv{font-size:22px;font-weight:900;font-family:var(--mono);color:var(--green)}
+.pool-card .pk{color:var(--text3);font-size:12px;margin-top:2px}
+.pool-card .pd{font-size:12px;color:var(--text2);flex:1;min-width:200px;line-height:1.6}
+.rarity-name{font-weight:700}
+.nft-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px dashed rgba(255,255,255,.07);flex-wrap:wrap}
+.nft-row:first-of-type{border-top:none}
+.nft-chip{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#0E1B24,#132633);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nft-chip svg{width:24px;height:24px;color:var(--green)}
+.nft-info{flex:1;min-width:180px}
+.nft-name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nft-meta{color:var(--text3);font-size:11px;font-family:var(--mono);margin-top:2px;display:flex;gap:12px;flex-wrap:wrap}
+.nft-meta b{color:var(--cyan);font-weight:600}
+
 /* ===== 创建盲盒 ===== */
 .create-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
 .form-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
@@ -316,6 +359,7 @@ button{font-family:inherit;cursor:pointer}
   .part-grid{grid-template-columns:repeat(4,1fr)}
   .creator-grid{grid-template-columns:1fr 1fr}
   .slot-grid{grid-template-columns:repeat(2,1fr)}
+  .ex-grid{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   .hero{padding:56px 0 40px}
@@ -367,6 +411,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
     <div class="nav-links">
       <a href="#market">盲盒市场</a>
+      <a href="#exchange">交易市场</a>
       <a href="#create">创建盲盒</a>
       <a href="#parts">部件库</a>
       <a href="#tapeout">合成台</a>
@@ -437,6 +482,74 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
     <div class="box-grid" id="boxGrid"><!-- box cards injected --></div>
+  </div>
+</section>
+
+<!-- ===== 交易市场 ===== -->
+<section class="sec" id="exchange">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="tag-line">EXCHANGE</div>
+        <h2>交易市场</h2>
+        <p class="sub">部件与主机 NFT 自由交易 · 手续费 2% · 一半进入 NFT 分红池</p>
+      </div>
+    </div>
+    <div class="pool-card" style="margin-bottom:26px">
+      <div><div class="pv" id="poolAmt">1,280 XCHIP</div><div class="pk">NFT 分红池</div></div>
+      <div><div class="pv" id="poolW">+13.6%</div><div class="pk">我的主机权重</div></div>
+      <div class="pd">持有主机 NFT 按分红权重瓜分交易手续费池。持有越多、权重越高，分红越多；交易每发生一笔，分红池实时增长。</div>
+    </div>
+
+    <div class="ex-grid">
+      <div class="ex-form">
+        <h4><span class="dot"></span>挂单 · 部件</h4>
+        <label>部件类型</label>
+        <select class="input" id="exPartType"></select>
+        <div class="ex-row">
+          <div><label>稀有度</label><select class="input" id="exPartRar"><option value="0">普通</option><option value="1">稀有</option><option value="2" selected>史诗</option><option value="3">传说</option></select></div>
+          <div><label>数量</label><input class="input" id="exPartQty" type="number" value="1" min="1"></div>
+        </div>
+        <label>单价 (XCHIP)</label>
+        <input class="input" id="exPartPrice" type="number" value="20" min="0.1" step="0.1">
+        <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:16px" onclick="placePartOrder()">确认挂单</button>
+      </div>
+      <div class="ex-list">
+        <div class="ex-list-head">
+          <h4>部件挂单</h4>
+          <div class="market-filter" id="partFilter" style="gap:6px">
+            <button class="fchip on" data-f="all">全部</button>
+            <button class="fchip" data-f="cpu">CPU</button>
+            <button class="fchip" data-f="gpu">显卡</button>
+            <button class="fchip" data-f="ram">内存</button>
+            <button class="fchip" data-f="mb">主板</button>
+            <button class="fchip" data-f="psu">电源</button>
+            <button class="fchip" data-f="cool">散热</button>
+            <button class="fchip" data-f="disk">硬盘</button>
+            <button class="fchip" data-f="case">机箱</button>
+          </div>
+        </div>
+        <div id="partOrderGrid"><!-- part orders injected --></div>
+      </div>
+    </div>
+
+    <div class="ex-grid nf">
+      <div class="ex-form">
+        <h4><span class="dot"></span>挂单 · 主机 NFT</h4>
+        <label>我的主机</label>
+        <select class="input" id="exNftSel"></select>
+        <label>价格 (XCHIP)</label>
+        <input class="input" id="exNftPrice" type="number" value="2500" min="1">
+        <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:16px" onclick="placeNftOrder()">确认挂单</button>
+      </div>
+      <div class="ex-list">
+        <div class="ex-list-head">
+          <h4>主机 NFT 挂单</h4>
+          <span style="color:var(--text3);font-size:12px">按算力与分红权重定价 · 购买即获分红权</span>
+        </div>
+        <div id="nftOrderGrid"><!-- nft orders injected --></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -920,6 +1033,125 @@ function startTapeOut(){
 }
 function closeResult(){$('#resultOverlay').classList.remove('show')}
 
+/* ============ 交易市场 ============ */
+var MY_WALLET='0x3fA9…c22E';
+var FEE_RATE=0.02, POOL_SHARE=0.5;
+var partPool=0;         /* 累计入池 */
+var poolBase=1280;      /* 分红池基数 */
+var myNfts=[
+  {id:'#0413',name:'TAPEX·PC',rar:3,hash:'2460',div:'+8.4%'},
+  {id:'#0519',name:'TAPEX·PC',rar:2,hash:'1520',div:'+5.2%'}
+];
+var partOrders=[
+  {id:1,typ:'cpu',r:2,qty:2,price:45,seller:'0x7A22…F30c'},
+  {id:2,typ:'gpu',r:1,qty:4,price:30,seller:'0x91bE…7D04'},
+  {id:3,typ:'ram',r:2,qty:6,price:12,seller:'0x5cD0…8aF1'},
+  {id:4,typ:'mb',r:0,qty:10,price:5,seller:'0x2B11…9eD4'},
+  {id:5,typ:'cool',r:2,qty:3,price:9,seller:'0x9E02…c11B'},
+  {id:6,typ:'disk',r:1,qty:5,price:7,seller:'0x3fA9…c22E'}
+];
+var nftOrders=[
+  {id:'#0317',name:'TAPEX·PC',rar:3,hash:'2880',div:'+9.6%',price:4500,seller:'0x91bE…7D04'},
+  {id:'#0288',name:'TAPEX·PC',rar:2,hash:'1640',div:'+5.8%',price:2100,seller:'0x5cD0…8aF1'},
+  {id:'#0102',name:'TAPEX·PC',rar:1,hash:'980',div:'+3.2%',price:980,seller:'0x7A22…F30c'},
+  {id:'#0456',name:'TAPEX·PC',rar:2,hash:'1910',div:'+6.4%',price:2650,seller:'0x3fA9…c22E'}
+];
+var PART_TYPES=['cpu','gpu','ram','mb','psu','cool','disk','case'];
+function partName(typ,r){var m={cpu:['CPU 核心','CPU Pro','CPU 旗舰'],gpu:['显卡标准','显卡 Pro','显卡旗舰'],ram:['内存标准','内存 Pro','内存旗舰'],mb:['主板标准','主板 Pro','主板旗舰'],psu:['电源标准','电源 Pro','电源旗舰'],cool:['散热标准','散热 Pro','散热旗舰'],disk:['硬盘标准','硬盘 Pro','硬盘旗舰'],case:['机箱标准','机箱 Pro','机箱旗舰']};return m[typ][r]}
+function refreshPool(){
+  var total=poolBase+partPool;
+  $('#poolAmt').textContent=total.toLocaleString()+' XCHIP';
+  var w=myNfts.reduce(function(s,n){return s+parseFloat(n.div)},0);
+  $('#poolW').textContent='+'+w.toFixed(1)+'%';
+}
+function renderPartOrders(f){
+  f=f||'all';
+  var g=$('#partOrderGrid');g.innerHTML='';
+  var rows=partOrders.filter(function(o){return f==='all'||o.typ===f});
+  if(!rows.length){g.innerHTML='<div style="color:var(--text3);font-size:13px;padding:18px 0">该类型暂无挂单</div>';return}
+  rows.forEach(function(o){
+    var row=document.createElement('div');row.className='order-row';
+    var mine=o.seller===MY_WALLET;
+    row.innerHTML=
+      '<div class="order-part">'+partSvg(o.typ,'var(--rare'+o.r+')')+
+      '<div><div class="op-name">'+partName(o.typ,o.r)+'<span class="rar-tag" style="color:var(--rare'+o.r+');border:1px solid color-mix(in srgb,var(--rare'+o.r+') 40%,transparent)">'+RARITY[o.r].n+'</span></div>'+
+      '<div class="op-sub">'+TYP_META[o.typ].n+' · 卖家 '+o.seller+'</div></div></div>'+
+      '<div class="order-qty">×<b>'+o.qty+'</b></div>'+
+      '<div class="order-price">'+fmtPrice(o.price)+'<small>单价</small></div>'+
+      '<button class="buy-btn'+(mine?' off':'')+'" data-id="'+o.id+'">'+(mine?'下架':'购买')+'</button>';
+    row.querySelector('.buy-btn').onclick=function(){
+      if(mine){partOrders=partOrders.filter(function(x){return x.id!==o.id});renderPartOrders(f);toast('已下架','部件挂单已撤（演示）')}
+      else{buyOrder(o)}
+    };
+    g.appendChild(row);
+  });
+}
+function buyOrder(o){
+  var fee=o.price*FEE_RATE*POOL_SHARE;
+  partPool+=fee;
+  o.qty--;
+  if(o.qty<=0){partOrders=partOrders.filter(function(x){return x.id!==o.id})}
+  renderPartOrders(document.querySelector('#partFilter .fchip.on').dataset.f);
+  refreshPool();
+  toast('购买成功 · 支付 '+fmtPrice(o.price),'手续费 '+fmtPrice(o.price*FEE_RATE)+' · '+fmtPrice(fee)+' 入分红池（演示）');
+}
+function renderNftOrders(){
+  var g=$('#nftOrderGrid');g.innerHTML='';
+  nftOrders.forEach(function(o){
+    var mine=o.seller===MY_WALLET;
+    var row=document.createElement('div');row.className='nft-row';
+    row.innerHTML=
+      '<div class="nft-chip"><svg viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="10" y="10" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 12h4M4 20h4M24 12h4M24 20h4M12 4v4M20 4v4M12 24v4M20 24v4" stroke="currentColor" stroke-width="1.2"/></svg></div>'+
+      '<div class="nft-info"><div class="nft-name">'+o.name+' '+o.id+'<span class="rar-tag" style="color:var(--rare'+o.rar+');border:1px solid color-mix(in srgb,var(--rare'+o.rar+') 40%,transparent)">'+RARITY[o.rar].n+'</span></div>'+
+      '<div class="nft-meta"><span>算力 <b>'+o.hash+' GH/s</b></span><span>分红权重 <b>'+o.div+'</b></span><span>卖家 '+o.seller+'</span></div></div>'+
+      '<div class="order-price">'+fmtPrice(o.price)+'<small>一口价</small></div>'+
+      '<button class="buy-btn'+(mine?' off':'')+'">'+(mine?'下架':'购买')+'</button>';
+    row.querySelector('.buy-btn').onclick=function(){
+      if(mine){nftOrders=nftOrders.filter(function(x){return x.id!==o.id});renderNftOrders();toast('已下架','主机挂单已撤（演示）')}
+      else{
+        var fee=o.price*FEE_RATE*POOL_SHARE;
+        partPool+=fee;
+        nftOrders=nftOrders.filter(function(x){return x.id!==o.id});
+        renderNftOrders();refreshPool();
+        toast('购买成功 · 支付 '+fmtPrice(o.price),'手续费 '+fmtPrice(o.price*FEE_RATE)+' · '+fmtPrice(fee)+' 入分红池（演示）');
+      }
+    };
+    g.appendChild(row);
+  });
+}
+function initExchange(){
+  var sel=$('#exPartType');sel.innerHTML='';
+  PART_TYPES.forEach(function(t){var op=document.createElement('option');op.value=t;op.textContent=TYP_META[t].n;sel.appendChild(op)});
+  var ns=$('#exNftSel');ns.innerHTML='';
+  myNfts.forEach(function(n){var op=document.createElement('option');op.value=n.id;op.textContent=n.name+' '+n.id+' · '+RARITY[n.rar].n+' · '+n.hash+' GH/s';ns.appendChild(op)});
+  document.querySelectorAll('#partFilter .fchip').forEach(function(f){
+    f.onclick=function(){
+      document.querySelectorAll('#partFilter .fchip').forEach(function(x){x.classList.remove('on')});
+      f.classList.add('on');renderPartOrders(f.dataset.f);
+    };
+  });
+  renderPartOrders('all');renderNftOrders();refreshPool();
+}
+function placePartOrder(){
+  var typ=$('#exPartType').value,r=parseInt($('#exPartRar').value),q=parseInt($('#exPartQty').value)||1,p=parseFloat($('#exPartPrice').value)||0;
+  if(p<=0||q<=0){toast('请填写有效数量与单价');return}
+  var id=Date.now();
+  partOrders.unshift({id:id,typ:typ,r:r,qty:q,price:p,seller:MY_WALLET});
+  renderPartOrders(document.querySelector('#partFilter .fchip.on').dataset.f);
+  toast('部件已挂单',''+TYP_META[typ].n+' ×'+q+' @ '+fmtPrice(p)+'（演示）');
+}
+function placeNftOrder(){
+  var id=$('#exNftSel').value,p=parseFloat($('#exNftPrice').value)||0;
+  var n=myNfts.filter(function(x){return x.id===id})[0];
+  if(!n||p<=0){toast('请选择主机并填写价格');return}
+  nftOrders.unshift({id:n.id,name:n.name,rar:n.rar,hash:n.hash,div:n.div,price:p,seller:MY_WALLET});
+  myNfts=myNfts.filter(function(x){return x.id!==id});
+  var ns=$('#exNftSel');ns.innerHTML='';
+  myNfts.forEach(function(x){var op=document.createElement('option');op.value=x.id;op.textContent=x.name+' '+x.id+' · '+RARITY[x.rar].n+' · '+x.hash+' GH/s';ns.appendChild(op)});
+  renderNftOrders();refreshPool();
+  toast('主机已挂单',''+n.name+' '+n.id+' @ '+fmtPrice(p)+'（演示）');
+}
+
 /* ============ 钱包 ============ */
 var connected=false;
 $('#walletBtn').onclick=function(){
@@ -935,6 +1167,7 @@ $('#walletBtn').onclick=function(){
 /* ============ 初始化 ============ */
 renderBoxes('all');renderParts();
 $('#tapeoutBtn').disabled=true;
+initExchange();
 </script>
 
 </html>

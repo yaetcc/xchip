@@ -427,7 +427,7 @@ button{font-family:inherit;cursor:pointer}
       <div>
         <div class="tag-line">MARKET</div>
         <h2>盲盒市场</h2>
-        <p class="sub">pump 曲线定价，越卖越贵；点击卡片体验开盒</p>
+        <p class="sub">固定价格销售，卖完即止；点击卡片体验开盒</p>
       </div>
       <div class="market-filter">
         <button class="fchip on" data-f="all">全部</button>
@@ -619,9 +619,9 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
     <div class="rank-list">
-      <div class="rank-row"><span class="rank-no">1</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="9" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M8 8V5M12 8V5M16 8V5M8 20v-3M12 20v-3M16 20v-3" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">芯片矿工补给盒</div><div class="rc">0x3fA9…c22E · 史诗</div></div><div class="rank-metrics"><div><div class="mv">2,380 XCHIP</div><div class="mk">当前价</div></div><div><div class="mv">98%</div><div class="mk">已售</div></div><div><div class="mv">+5.2K</div><div class="mk">热度</div></div></div></div>
-      <div class="rank-row"><span class="rank-no">2</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M9 8l3 3 3-3M9 13l3 3 3-3" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">满血显卡盲盒</div><div class="rc">0x91bE…7D04 · 传说</div></div><div class="rank-metrics"><div><div class="mv">3,120 XCHIP</div><div class="mk">当前价</div></div><div><div class="mv">64%</div><div class="mk">已售</div></div><div><div class="mv">+4.1K</div><div class="mk">热度</div></div></div></div>
-      <div class="rank-row"><span class="rank-no">3</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M9 7v10M15 7v10" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">机房内存条盲盒</div><div class="rc">0x5cD0…8aF1 · 史诗</div></div><div class="rank-metrics"><div><div class="mv">1,760 XCHIP</div><div class="mk">当前价</div></div><div><div class="mv">82%</div><div class="mk">已售</div></div><div><div class="mv">+3.6K</div><div class="mk">热度</div></div></div></div>
+      <div class="rank-row"><span class="rank-no">1</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="9" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M8 8V5M12 8V5M16 8V5M8 20v-3M12 20v-3M16 20v-3" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">芯片矿工补给盒</div><div class="rc">0x3fA9…c22E · 史诗</div></div><div class="rank-metrics"><div><div class="mv">2,380 XCHIP</div><div class="mk">盒价</div></div><div><div class="mv">98%</div><div class="mk">已售</div></div><div><div class="mv">+5.2K</div><div class="mk">热度</div></div></div></div>
+      <div class="rank-row"><span class="rank-no">2</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M9 8l3 3 3-3M9 13l3 3 3-3" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">满血显卡盲盒</div><div class="rc">0x91bE…7D04 · 传说</div></div><div class="rank-metrics"><div><div class="mv">3,120 XCHIP</div><div class="mk">盒价</div></div><div><div class="mv">64%</div><div class="mk">已售</div></div><div><div class="mv">+4.1K</div><div class="mk">热度</div></div></div></div>
+      <div class="rank-row"><span class="rank-no">3</span><span class="rank-icon"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="1.5" fill="none" stroke="#00E5A0" stroke-width="1.6"/><path d="M9 7v10M15 7v10" stroke="#00E5A0" stroke-width="1.2"/></svg></span><div class="rank-info"><div class="rn">机房内存条盲盒</div><div class="rc">0x5cD0…8aF1 · 史诗</div></div><div class="rank-metrics"><div><div class="mv">1,760 XCHIP</div><div class="mk">盒价</div></div><div><div class="mv">82%</div><div class="mk">已售</div></div><div><div class="mv">+3.6K</div><div class="mk">热度</div></div></div></div>
     </div>
   </div>
 </section>
@@ -740,7 +740,7 @@ function $(s){return document.querySelector(s)}
 function toast(msg,sub){var w=$('#toastWrap');var t=document.createElement('div');t.className='toast';t.innerHTML='<span class="tdot"></span>'+msg;w.appendChild(t);setTimeout(function(){t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(function(){t.remove()},400)},2600)}
 function scrollTo2(sel){document.querySelector(sel).scrollIntoView({behavior:'smooth'})}
 function fmtPrice(p){return p>=1000?Math.round(p).toLocaleString()+' XCHIP':p.toFixed(1).replace(/\.0$/,'')+' XCHIP'}
-function boxPrice(box,n){n=n===undefined?box.sold:n;return box.base*Math.pow(1.018,n)}
+function boxPrice(box,n){n=n===undefined?box.sold:n;return box.base}
 function partSvg(typ,color){return '<svg viewBox="0 0 24 24" fill="none">'+TYP_META[typ].icon.replace(/currentColor/g,color)+'</svg>'}
 
 /* ============ 盲盒市场 ============ */
@@ -750,7 +750,6 @@ function renderBoxes(filter){
     var ok=(filter==='all')||(filter==='hot'&&b.hot)||(filter!=='hot'&&'r'+b.rar===filter);
     if(!ok)return;
     var p=boxPrice(b);
-    var nextP=boxPrice(b,b.sold+1);
     var pct=Math.round(b.sold/b.total*100);
     var card=document.createElement('div');
     card.className='box-card r'+b.rar;
@@ -761,7 +760,7 @@ function renderBoxes(filter){
       '<div class="box-body">'+
       '<div class="box-name">'+b.name+'</div>'+
       '<div class="box-creator">'+b.creator+' · 创建者 '+b.src+'</div>'+
-      '<div class="box-price-row"><span class="box-price">'+fmtPrice(p)+'<small>当前</small></span><span class="box-next">+'+fmtPrice(nextP-p)+' 下一份</span></div>'+
+      '<div class="box-price-row"><span class="box-price">'+fmtPrice(p)+'<small> /盒</small></span><span class="box-next">已售 '+pct+'%</span></div>'+
       '<div class="progress"><i style="width:'+pct+'%"></i></div>'+
       '<div class="progress-meta"><span>已售 '+b.sold+' / '+b.total+'</span><span>'+pct+'%</span></div>'+
       '<div class="box-foot"><div class="pool-dots">'+b.pool.map(function(t){return '<span class="pool-dot '+t+'">'+partSvg(t,'#5E7386')+'</span>'}).join('')+'</div><span class="sold-tag">90% <b>归你</b></span></div>'+
@@ -808,7 +807,7 @@ function openBox(box){
       $('#openReveal').classList.add('show');
       myParts[typ]=(myParts[typ]||0)+1;renderParts();
       var earn=parseFloat($('#earnPill').textContent.replace(/[^0-9.]/g,''));
-      $('#earnPill').textContent='+'+ (earn+boxPrice(box)*0.02).toFixed(1)+' XCHIP';
+      $('#earnPill').textContent='+'+ (earn+boxPrice(box)*0.9).toFixed(1)+' XCHIP';
     },700);
   },1100);
 }
